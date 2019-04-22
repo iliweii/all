@@ -1,0 +1,445 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #66afe9;
+}
+.nav-pc{
+    height: 75px;
+    width: 80%;
+    padding: 0 10% 0 10%;
+    background-color: #000;
+    box-shadow: rgba(0, 0, 0, 0.77) 0 0 5px;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    z-index: 5;
+}
+.nav-phone {
+    display: none;
+    position: fixed;
+    z-index: 5;
+    overflow: hidden;
+    left: 70%;
+    top: 4%;
+    width: auto;
+    height: 90px;
+    background: #fff;
+    border-radius: 5px;
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+.nav__cb {
+    z-index: -1000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+.nav__content {
+    position: relative;
+    width: 90px;
+    height: 100%;
+    -webkit-transition: width 1s cubic-bezier(0.49, -0.3, 0.68, 1.23);
+    transition: width 1s cubic-bezier(0.49, -0.3, 0.68, 1.23);
+}
+.nav__cb:checked ~ .nav__content {
+    -webkit-transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+    transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+    width: 444px;
+}
+.nav__items {
+    position: relative;
+    width: 410px;
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 110px;
+    list-style-type: none;
+    font-size: 0;
+}
+.nav__item {
+    display: inline-block;
+    vertical-align: top;
+    width: 70px;
+    text-align: center;
+    color: #6C7784;
+    font-size: 14px;
+    line-height: 90px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+.nav__item:hover {
+    color: #00bdea;
+}
+.nav__item-text {
+    display: block;
+    height: 100%;
+    -webkit-transform: rotateY(-70deg);
+    transform: rotateY(-70deg);
+    opacity: 0;
+    -webkit-transition: opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    transition: opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.7s;
+    transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+}
+.nav__cb:checked ~ .nav__content .nav__item-text {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+    opacity: 1;
+    -webkit-transition: opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    transition: opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.2s;
+    transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+}
+.nav__item:nth-child(1) .nav__item-text {
+    -webkit-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+}
+.nav__cb:checked ~ .nav__content .nav__item:nth-child(1) .nav__item-text {
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+.nav__item:nth-child(2) .nav__item-text {
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+}
+.nav__cb:checked ~ .nav__content .nav__item:nth-child(2) .nav__item-text {
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+}
+.nav__item:nth-child(3) .nav__item-text {
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+}
+.nav__cb:checked ~ .nav__content .nav__item:nth-child(3) .nav__item-text {
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+}
+.nav__item:nth-child(4) .nav__item-text {
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+.nav__cb:checked ~ .nav__content .nav__item:nth-child(4) .nav__item-text {
+    -webkit-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+}
+.nav__btn {
+    position: absolute;
+    right: -62px;
+    top: 0;
+    width: 90px;
+    height: 90px;
+    padding: 36px 31px;
+    cursor: pointer;
+}
+.nav__btn:before, .nav__btn:after {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 4px;
+    border-radius: 2px;
+    background: #096DD3;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transition: background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+    transition: background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+    transition: transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3), background-color 0.3s;
+    transition: transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3), background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+}
+.nav__btn:before {
+    margin-bottom: 10px;
+}
+.nav__btn:hover:before, .nav__btn:hover:after {
+    background: #00bdea;
+}
+.nav__cb:checked ~ .nav__btn:before {
+    -webkit-transform: translateY(7px) rotate(-225deg);
+    transform: translateY(7px) rotate(-225deg);
+}
+.nav__cb:checked ~ .nav__btn:after {
+    -webkit-transform: translateY(-7px) rotate(225deg);
+    transform: translateY(-7px) rotate(225deg);
+}
+.nav_a{
+    font-size: 22px;
+    color: #fff;
+    align-self: center;
+    text-decoration: none;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: 600ms;
+}
+.nav_a:hover{
+    transform: scale(1.4);
+    text-shadow: #00bdea 0 0 5px;
+}
+.nav-phone_a{
+    text-decoration: none;
+}
+@keyframes logo {
+    25% {
+        transform: rotate(5deg);
+    }
+
+    50% {
+        transform: rotate(-7deg);
+    }
+
+    75% {
+        transform: rotate(7deg);
+    }
+
+    100% {
+        transform: rotate(-4deg);
+    }
+}
+.nav_logo>img{
+    height: 75px;
+    transition: 5000ms;
+    animation: logo 5s;
+    animation-fill-mode: forwards;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+.banner{
+    height: 200px;
+    padding-top: 125px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #66afe9;
+}
+.banner_h1{
+    text-align: center;
+}
+.studentA{
+    width: 80%;
+    height: 500px;
+    margin: 0 auto;
+    padding-top: 75px;
+    background-color: linen;
+    display: flex;
+    flex-direction: column;
+    transition: 500ms;
+}
+.studentB{
+    width: 80%;
+    height: 500px;
+    margin: 0 auto;
+    padding-top: 75px;
+    background-color: #bce8f1;
+    display: flex;
+    flex-direction: column;
+    transition: 500ms;
+}
+.teachers{
+    width: 80%;
+    height: 300px;
+    margin: 0 auto;
+    padding-top: 75px;
+    background-color: #f1a8c9;
+    display: flex;
+    flex-direction: column;
+    transition: 500ms;
+}
+.studentBlock{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.studentRank{
+    height: 90%;
+    width: 100%;
+}
+.teacherBlock{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.teacherRank{
+    height: 90%;
+    width: 100%;
+}
+.collegeRank{
+    height: 150%;
+    width: 100%;
+    background-color: #fff;
+    position: relative;
+    bottom: 60%;
+    border-radius: 5px;
+    border: #000;
+    box-shadow: rgba(54, 0, 203, 0.76) 0 0 15px;
+}
+.items{
+    width: 95%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 24%;
+    height: 24%;
+    background-color: #fff;
+    border: #000 solid 1px;
+    border-radius: 5px;
+    flex-grow: 1;
+    transition: 500ms;
+}
+.item:hover{
+    transform: scale(1.4);
+    box-shadow: #66afe9 0 0 10px;
+}
+.teacherRank>.items>.item{
+    width: 45%;
+    height: 30%;
+}
+.womanTeacher{
+    position: relative;
+    bottom: 100px;
+}
+.mixedTeacherRank{
+    height: 100%;
+    width: 33.3%;
+    align-self: flex-end;
+    position: relative;
+    bottom: 130px;
+}
+h1{
+    font-family: Kaiti;
+    font-size: 48px;
+    transition: 500ms;
+    text-shadow: rgba(0, 0, 0, 0.84) 0 0 8px;
+}
+h2{
+    text-align: center;
+}
+h3{
+    text-align: center;
+}
+h4{
+    text-align: center;
+}
+.LD_BG{
+    width: 80%;
+    height: 500px;
+    margin: 0 auto;
+    padding-top: 75px;
+    background-color: #c3d687;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    transition: 500ms;
+}
+.footer{
+    height: 75px;
+    width: 100%;
+    background-color: #000;
+}
+/*手机横屏*/
+@media (max-width: 935px) {
+    .nav-pc{
+        display: none;
+    }
+    .nav-phone{
+        display: block;
+    }
+    .banner{
+        background-image: url('/public/img/youthol_logo.png');
+        background-size: 30%;
+        background-repeat: no-repeat;
+        background-position: 10px 10px;
+        height: 40px;
+    }
+    h1{
+        font-size: 36px;
+    }
+    .studentA{
+        width: 100%;
+    }
+    .studentB{
+        width: 100%;
+    }
+    .teachers{
+        width: 100%;
+    }
+    .LD_BG{
+        width: 100%;
+    }
+}
+/*手机竖屏*/
+@media (max-width: 700px) {
+    h1{
+        font-size: 30px;
+    }
+    .studentA{
+        height: 1000px;
+    }
+    .studentB{
+        height: 800px;
+    }
+    .teachers{
+        height: 800px;
+    }
+    .mixedTeacher{
+        height: 300px;
+    }
+    .studentBlock{
+        flex-direction: column;
+    }
+    .studentRank{
+        height: 55%;
+        width: 100%;
+    }
+    .teacherBlock{
+        flex-direction: column;
+    }
+    .teacherRank{
+        height: 50%;
+        width: 100%;
+        flex-grow: 1;
+    }
+    .mixedTeacherRank{
+        width: 100%;
+        bottom: 0;
+    }
+    .womanTeacher{
+        bottom: 0;
+    }
+    .collegeRank{
+         display: none;
+     }
+    .items{
+        height: 70%;
+    }
+    .item{
+        height: 30%;
+    }
+    .mixedTeacherRank>.items>.item{
+        height: 60%;
+    }
+}
+@media (max-width: 600px) {
+    .nav-phone{
+        left: 50%;
+    }
+    .nav__cb:checked ~ .nav__content {
+        width: 350px;
+    }
+}
