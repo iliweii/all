@@ -114,9 +114,22 @@ class RankController extends Controller
         echo(json_encode($schedule));
         return;
     }
-    public function search($id) // 根据项目id查询项目组成绩
+    public function search($id) // 根据项目table2 id查询项目组成绩
     {
         $item = DB::select("SELECT * FROM table2 WHERE id = ?", [$id]);
+        $total = DB::select("SELECT * FROM `table1` WHERE item = ? ORDER BY place", [$item[0]->item]);
+        for($i = 0; $i < 6; $i ++) // 把成绩里学院id换成学院名称
+        {
+            $college_name = DB::select("SELECT * FROM `colleges` WHERE id = ?", [
+                $total[$i]->college
+            ]);
+            $total[$i]->college = $college_name[0]->name;
+        }
+        echo(json_encode($total));
+    }
+    public function search5($id) // 根据项目table4 id查询项目组成绩
+    {
+        $item = DB::select("SELECT * FROM table2 WHERE item = ?", [$id]);
         $total = DB::select("SELECT * FROM `table1` WHERE item = ? ORDER BY place", [$item[0]->item]);
         for($i = 0; $i < 6; $i ++) // 把成绩里学院id换成学院名称
         {
