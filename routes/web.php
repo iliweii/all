@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/temp', '\App\Http\Controllers\RankController@index');
 Route::get('/temp/list', '\App\Http\Controllers\RankController@list');
 Route::get('/temp/notice', '\App\Http\Controllers\RankController@notice');
+Route::get('/temp/notice2', '\App\Http\Controllers\RankController@notice2');
 Route::get('/temp/notice/{post}', '\App\Http\Controllers\RankController@search5');
 Route::post('/temp/submit', '\App\Http\Controllers\RankController@submit');
 Route::post('/temp/submit2', '\App\Http\Controllers\RankController@submit2');

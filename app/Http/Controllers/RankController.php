@@ -31,7 +31,6 @@ class RankController extends Controller
             ]);
             $schedule[$i]->item = $item_name[0]->item;
         }
-
         echo(json_encode($schedule));
         return;
     }
@@ -114,6 +113,12 @@ class RankController extends Controller
         echo(json_encode($schedule));
         return;
     }
+    public function notice2() // 公告（只有决赛和提交过成绩的比赛项目）
+    {
+        $schedule = DB::select("select * from table2, table4 where table4.id in (select item from table2 A where exists (SELECT * from table1 WHERE table1.item = A.item) AND state = '决赛') and table2.item = table4.id");
+
+        return json_encode($schedule);
+}
     public function search($id) // 根据项目table2 id查询项目组成绩
     {
         $item = DB::select("SELECT * FROM table2 WHERE id = ?", [$id]);
@@ -209,13 +214,13 @@ class RankController extends Controller
 
         for($i = 0; $i < 6; $i++) // 把成绩里项目名称换位id，学院名称换位id
         {
-            $item = DB::select("SELECT * FROM `table4` WHERE item = ?", [
+            $item_id = DB::select('SELECT table2.item FROM `table4`,table2 WHERE table4.id=table2.item and table2.state="决赛" and table4.item = ?', [
                 json_decode($input['item'])]);
             $college = DB::select("SELECT * FROM `colleges` WHERE name = ?", [
                 $data[$i]->college]);
             DB::insert('INSERT INTO table1 (college, item, `name`, score, place) VALUES (?, ?, ?, ?, ?)', [
                 $college[0]->id,
-                $item[0]->id,
+                $item_id[0]->item,
                 $data[$i]->name,
                 $data[$i]->score,
                 $data[$i]->place
@@ -249,7 +254,7 @@ class RankController extends Controller
             $data['id']
         ]);
     }
-    public function delete($id)
+    public function delete($id) // 删除
     {
         $item = DB::select("SELECT * FROM `table2` WHERE id = ?", [$id]);
         DB::delete('DELETE FROM `table2` WHERE `table2`.`id` = ?', [
@@ -258,7 +263,7 @@ class RankController extends Controller
         DB::delete('DELETE FROM `table4` WHERE `table4`.`id` = ?', [
             $item[0]->item
         ]);
-        $data = DB::select("SELECT * FROM table1 WHERE id = ?", [$item[0]->item]);
+        $data = DB::select("SELECT * FROM table1 WHERE item = ?", [$item[0]->item]);
         if($data) {
             DB::delete('DELETE FROM `table1` WHERE `table1`.`item` = ?', [
                 $item[0]->item
